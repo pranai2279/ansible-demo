@@ -1,0 +1,36 @@
+---
+- hosts: all
+  name: Playbook using variables
+  vars:
+    web_pkg: httpd
+    firewall_pkg: firewalld
+    perl_pkg: perl
+    rule: http
+  tasks:
+    - name: Install package
+      yum:
+        name:
+              - "{{ web_pkg }}"
+              - "{{ firewall_pkg }}"
+              - "{{ perl_pkg }}"
+        state: latest
+    - name: Start & enable service httpd
+      service:
+         name: "{{ web_pkg }}"
+         enabled: true
+         state: started
+    - name: Start & enable service firewalld
+      service:
+         name: "{{ firewall_pkg }}"
+         enabled: true
+         state: started
+    - name: Create web content
+      copy:
+        content: "Welcome to Ansible Training - EJ DevOps"
+        dest: /var/www/html/index.html
+    - name: Open the port for {{ rule }}
+      firewalld:
+         service: "{{ rule }}"
+         permanent: true
+         immediate: true
+         state: enabled

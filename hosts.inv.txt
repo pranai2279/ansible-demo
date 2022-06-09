@@ -1,0 +1,2 @@
+[ansible_servers]
+10.50.13.18 ansible_ssh_user=root ansible_ssh_pass=root@123
