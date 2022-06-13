@@ -26,7 +26,7 @@
          state: started
     - name: Create web content
       copy:
-        content: "Welcome to Ansible Training - EJ DevOps"
+        content: "It's Monday, but it's okay..."
         dest: /var/www/html/index.html
     - name: Open the port for {{ rule }}
       firewalld:
